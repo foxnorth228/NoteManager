@@ -16,5 +16,5 @@ coverage/*
 node_modules/*
 public
 !public/index.html
-!public/Group.svg
+!public/list.svg
 !public/index.draft.html
