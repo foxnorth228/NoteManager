@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "target": "ESNext",
+    "module": "ESNext",
+    "rootDir": "./src",
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "paths": {
+      "@src/*":       ["./src/*"],
+      "@assets/*":     ["./src/assets/*"],
+      "@components/*": ["./src/components/*"],
+      "@constants/*":   ["./src/constants/*"],
+      "@hooks/*":   ["./src/hooks/*"],
+      "@layouts/*":   ["./src/layouts/*"],
+      "@pages/*":      ["./src/pages/*"],
+      "@store/*":   ["./src/store/*"],
+      "@utils/*":   ["./src/utils/*"]
+    },
+    "resolveJsonModule": true,
+    "outDir": "./build",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "skipLibCheck": true,
+    "types": ["node"],
+  },
+  "include": ["./src/styled.d.ts"],
+}
