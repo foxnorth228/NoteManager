@@ -1,32 +1,29 @@
 import './style.scss';
 
+import HighLightText from '@components/HighLightText';
 import ClearIcon from '@mui/icons-material/Clear';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import { Card, CardActions, CardContent, IconButton } from '@mui/material';
-import React, { ChangeEvent, useCallback, useRef, useState } from 'react';
+import { useEditNote, useRemoveNote } from '@store/slices/notesSlice/hooks';
+import { INote } from '@store/slices/notesSlice/types';
+import React, { useCallback, useState } from 'react';
 
-const Note = () => {
+type INoteComponent = {
+  baseNote: INote;
+};
+
+const Note = ({ baseNote }: INoteComponent) => {
   const [isEditable, setIsEditable] = useState(false);
-  const refBackdrop = useRef<HTMLDivElement>(null);
-  const refHighlight = useRef<HTMLDivElement>(null);
-
-  const onChangeTextarea = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
-    const text = e.currentTarget.value;
-    refHighlight!.current!.innerHTML = text
-      .replace(/\n$/g, '\n\n')
-      .replace(/#.+?\b/g, '<mark>$&</mark>');
-  }, []);
-
-  const onScrollTextarea = useCallback((e: React.UIEvent<HTMLTextAreaElement, UIEvent>) => {
-    console.log('scroll', e.currentTarget.scrollTop);
-    refBackdrop!.current!.scroll(0, e.currentTarget.scrollTop);
-    console.log(refBackdrop!.current!.scrollTop);
-  }, []);
+  const [note, setNote] = useState({ note: '', tags: [] as string[] });
+  const editNote = useEditNote();
+  const removeNote = useRemoveNote();
 
   const onClickEdit = useCallback(() => {
     setIsEditable(!isEditable);
   }, [isEditable]);
+
+  const onClickDelete = useCallback(() => {}, []);
 
   return (
     <Card
@@ -42,7 +39,7 @@ const Note = () => {
         <IconButton onClick={onClickEdit}>
           {isEditable ? <SaveOutlinedIcon /> : <EditNoteIcon />}
         </IconButton>
-        <IconButton>
+        <IconButton onClick={onClickDelete}>
           <ClearIcon></ClearIcon>
         </IconButton>
       </CardActions>
@@ -55,15 +52,7 @@ const Note = () => {
           position: 'relative',
         }}
       >
-        <div ref={refBackdrop} className="card__content card__backdrop">
-          <div ref={refHighlight} className="card__highlights card__text"></div>
-        </div>
-        <textarea
-          disabled={!isEditable}
-          onChange={(e) => onChangeTextarea(e)}
-          onScroll={(e) => onScrollTextarea(e)}
-          className="card__content card__textarea card__text"
-        />
+        <HighLightText isDisabled={!isEditable} note={note} setNote={setNote} />
       </CardContent>
       <CardContent></CardContent>
     </Card>

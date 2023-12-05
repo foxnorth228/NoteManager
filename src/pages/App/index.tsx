@@ -1,4 +1,5 @@
 import Note from '@components/Note';
+import NoteNew from '@components/NoteNew';
 import { GlobalStyles } from '@mui/material';
 import React from 'react';
 
@@ -17,8 +18,8 @@ const App = () => {
   return (
     <div>
       {globalStyles}
-      Hello world
-      <Note></Note>
+      <NoteNew />
+      <Note />
     </div>
   );
 };
