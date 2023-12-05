@@ -2,12 +2,15 @@ import './style.scss';
 
 import ClearIcon from '@mui/icons-material/Clear';
 import EditNoteIcon from '@mui/icons-material/EditNote';
+import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import { Card, CardActions, CardContent, IconButton } from '@mui/material';
-import React, { ChangeEvent, useCallback, useRef } from 'react';
+import React, { ChangeEvent, useCallback, useRef, useState } from 'react';
 
 const Note = () => {
+  const [isEditable, setIsEditable] = useState(false);
   const refBackdrop = useRef<HTMLDivElement>(null);
   const refHighlight = useRef<HTMLDivElement>(null);
+
   const onChangeTextarea = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
     const text = e.currentTarget.value;
     refHighlight!.current!.innerHTML = text
@@ -20,6 +23,11 @@ const Note = () => {
     refBackdrop!.current!.scroll(0, e.currentTarget.scrollTop);
     console.log(refBackdrop!.current!.scrollTop);
   }, []);
+
+  const onClickEdit = useCallback(() => {
+    setIsEditable(!isEditable);
+  }, [isEditable]);
+
   return (
     <Card
       sx={{
@@ -31,8 +39,8 @@ const Note = () => {
       }}
     >
       <CardActions sx={{ justifyContent: 'flex-end' }}>
-        <IconButton>
-          <EditNoteIcon></EditNoteIcon>
+        <IconButton onClick={onClickEdit}>
+          {isEditable ? <SaveOutlinedIcon /> : <EditNoteIcon />}
         </IconButton>
         <IconButton>
           <ClearIcon></ClearIcon>
@@ -51,6 +59,7 @@ const Note = () => {
           <div ref={refHighlight} className="card__highlights card__text"></div>
         </div>
         <textarea
+          disabled={!isEditable}
           onChange={(e) => onChangeTextarea(e)}
           onScroll={(e) => onScrollTextarea(e)}
           className="card__content card__textarea card__text"
