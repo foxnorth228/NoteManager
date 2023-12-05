@@ -12,35 +12,33 @@
 }
 
 .card__textarea {
-  border: 0;
-  outline: 0;
   margin: 0;
+  border: 0;
   border-radius: 0;
-  padding: 0;
+  outline: 0;
   color: #444; /* or whatever */
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.05);
   z-index: 2;
-  font: 20px/28px 'Open Sans', sans-serif;
-  letter-spacing: 1px;
 }
 
-.backdrop {
+.card__backdrop {
   pointer-events: none;
   overflow: auto;
   background-color: #fff; /* or whatever */
 }
 
-.highlights {
-  width: 100%;
-  height: 100%;
+.card__highlights {
   white-space: pre-wrap;
   word-wrap: break-word;
   color: transparent;
-  font: 20px/28px 'Open Sans', sans-serif;
-  letter-spacing: 1px;
+  & mark {
+    color: transparent;
+    background-color: #d4e9ab;
+  }
 }
 
-mark {
-  color: transparent;
-  background-color: #d4e9ab; /* or whatever */
+.card__text {
+  font: 18px/24px 'Open Sans', sans-serif;
+  letter-spacing: 1px;
+  padding: 12px 15px;
 }

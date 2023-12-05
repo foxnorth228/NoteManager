@@ -12,7 +12,7 @@ const Note = () => {
     const text = e.currentTarget.value;
     refHighlight!.current!.innerHTML = text
       .replace(/\n$/g, '\n\n')
-      .replace(/[A-Z].*?\b/g, '<mark>$&</mark>');
+      .replace(/#.+?\b/g, '<mark>$&</mark>');
   }, []);
 
   const onScrollTextarea = useCallback((e: React.UIEvent<HTMLTextAreaElement, UIEvent>) => {
@@ -27,7 +27,7 @@ const Note = () => {
         gridTemplateRows: 'min-content 4fr 1fr',
         maxWidth: 400,
         minHeight: 400,
-        boxShadow: 2,
+        boxShadow: 3,
       }}
     >
       <CardActions sx={{ justifyContent: 'flex-end' }}>
@@ -47,13 +47,13 @@ const Note = () => {
           position: 'relative',
         }}
       >
-        <div ref={refBackdrop} className="card__content backdrop">
-          <div ref={refHighlight} className="highlights"></div>
+        <div ref={refBackdrop} className="card__content card__backdrop">
+          <div ref={refHighlight} className="card__highlights card__text"></div>
         </div>
         <textarea
           onChange={(e) => onChangeTextarea(e)}
           onScroll={(e) => onScrollTextarea(e)}
-          className="card__content card__textarea"
+          className="card__content card__textarea card__text"
         />
       </CardContent>
       <CardContent></CardContent>
