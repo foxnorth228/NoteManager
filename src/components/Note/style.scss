@@ -17,8 +17,13 @@
   border-radius: 0;
   outline: 0;
   color: #444; /* or whatever */
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.02);
   z-index: 2;
+  resize: none;
+}
+
+.card__textarea:focus {
+  background-color: rgba(0, 0, 0, 0.08);
 }
 
 .card__backdrop {
