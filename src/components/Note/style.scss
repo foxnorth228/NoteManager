@@ -1,0 +1,46 @@
+.card__content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  z-index: 1;
+}
+
+.card__textarea {
+  border: 0;
+  outline: 0;
+  margin: 0;
+  border-radius: 0;
+  padding: 0;
+  color: #444; /* or whatever */
+  background-color: transparent;
+  z-index: 2;
+  font: 20px/28px 'Open Sans', sans-serif;
+  letter-spacing: 1px;
+}
+
+.backdrop {
+  pointer-events: none;
+  overflow: auto;
+  background-color: #fff; /* or whatever */
+}
+
+.highlights {
+  width: 100%;
+  height: 100%;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: transparent;
+  font: 20px/28px 'Open Sans', sans-serif;
+  letter-spacing: 1px;
+}
+
+mark {
+  color: transparent;
+  background-color: #d4e9ab; /* or whatever */
+}

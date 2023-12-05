@@ -12,6 +12,11 @@ module.exports = merge(common,{
         exclude: /node_modules/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
+      {
+        test: /\.s[ac]ss$/,
+        exclude: /node_modules/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+      },
     ]
   },
   plugins: [

@@ -1,9 +1,25 @@
+import './style.scss';
+
 import ClearIcon from '@mui/icons-material/Clear';
 import EditNoteIcon from '@mui/icons-material/EditNote';
-import { Card, CardActions, CardContent, IconButton, TextareaAutosize } from "@mui/material";
-import React from 'react';
+import { Card, CardActions, CardContent, IconButton } from '@mui/material';
+import React, { ChangeEvent, useCallback, useRef } from 'react';
 
 const Note = () => {
+  const refBackdrop = useRef<HTMLDivElement>(null);
+  const refHighlight = useRef<HTMLDivElement>(null);
+  const onChangeTextarea = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
+    const text = e.currentTarget.value;
+    refHighlight!.current!.innerHTML = text
+      .replace(/\n$/g, '\n\n')
+      .replace(/[A-Z].*?\b/g, '<mark>$&</mark>');
+  }, []);
+
+  const onScrollTextarea = useCallback((e: React.UIEvent<HTMLTextAreaElement, UIEvent>) => {
+    console.log('scroll', e.currentTarget.scrollTop);
+    refBackdrop!.current!.scroll(0, e.currentTarget.scrollTop);
+    console.log(refBackdrop!.current!.scrollTop);
+  }, []);
   return (
     <Card
       sx={{
@@ -22,8 +38,23 @@ const Note = () => {
           <ClearIcon></ClearIcon>
         </IconButton>
       </CardActions>
-      <CardContent sx={{ borderTop: 1, borderBottom: 1, borderColor: 'grey.400', padding: 0 }}>
-        <textarea style={{ width: '100%', height: '100%', overflowY: 'auto' }} />
+      <CardContent
+        sx={{
+          borderTop: 1,
+          borderBottom: 1,
+          borderColor: 'grey.300',
+          padding: 0,
+          position: 'relative',
+        }}
+      >
+        <div ref={refBackdrop} className="card__content backdrop">
+          <div ref={refHighlight} className="highlights"></div>
+        </div>
+        <textarea
+          onChange={(e) => onChangeTextarea(e)}
+          onScroll={(e) => onScrollTextarea(e)}
+          className="card__content card__textarea"
+        />
       </CardContent>
       <CardContent></CardContent>
     </Card>
