@@ -1,5 +1,8 @@
-export type INote = {
-  id: number;
+export interface INoteView {
   note: string;
   tags: string[];
-};
+}
+
+export interface INote extends INoteView {
+  id: string;
+}

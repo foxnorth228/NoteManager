@@ -4,11 +4,17 @@ import { Card, CardActions, CardContent, IconButton } from '@mui/material';
 import React, { useCallback, useState } from 'react';
 
 import { useAddNote } from '../../store/slices/notesSlice/hooks';
+import config from "@config/config";
 
-const Note = () => {
+const NoteNew = () => {
   const addNote = useAddNote();
-  const [note, setNote] = useState({ note: '', tags: [] as string[] });
-  const onClickAdd = useCallback(() => {}, []);
+  const [text, setText] = useState('');
+  const onClickAdd = useCallback(() => {
+    const regex = new RegExp(config.highlightRegEx.source, config.highlightRegEx.flags + 'g');
+    const tags = text.match(regex) ?? [];
+    addNote({ note: text, tags });
+    setText('');
+  }, [addNote, text]);
 
   return (
     <Card
@@ -34,11 +40,11 @@ const Note = () => {
           position: 'relative',
         }}
       >
-        <HighLightText note={note} setNote={setNote} />
+        <HighLightText text={text} setText={setText} />
       </CardContent>
       <CardContent></CardContent>
     </Card>
   );
 };
 
-export default Note;
+export default NoteNew;

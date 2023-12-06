@@ -1,7 +1,7 @@
-import Note from '@components/Note';
-import NoteNew from '@components/NoteNew';
 import { GlobalStyles } from '@mui/material';
 import React from 'react';
+
+import NoteList from '../../layouts/NoteList';
 
 const globalStyles = (
   <GlobalStyles
@@ -18,8 +18,7 @@ const App = () => {
   return (
     <div>
       {globalStyles}
-      <NoteNew />
-      <Note />
+      <NoteList />
     </div>
   );
 };

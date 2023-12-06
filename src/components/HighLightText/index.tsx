@@ -1,24 +1,19 @@
+import './style.scss';
+
 import React, { ChangeEvent, useCallback, useRef } from 'react';
+import parse from 'html-react-parser';
 
-type IHighLightText = {
-  isDisabled?: boolean;
-  note: { note: string; tags: string[] };
-  setNote: React.Dispatch<React.SetStateAction<{ note: string; tags: string[] }>>;
-};
+import { IHighLightText } from './types';
 
-const HighLightText = ({ isDisabled = false, note, setNote }: IHighLightText) => {
+const HighLightText = ({ isDisabled = false, text, setText }: IHighLightText) => {
   const refBackdrop = useRef<HTMLDivElement>(null);
   const refHighlight = useRef<HTMLDivElement>(null);
 
   const onChangeTextarea = useCallback(
     (e: ChangeEvent<HTMLTextAreaElement>) => {
-      const text = e.currentTarget.value.replace(/\n$/g, '\n\n');
-      const tags = text.match(/#.+?\b/g) ?? [];
-      setNote({ note: text, tags });
-      console.log(tags);
-      refHighlight!.current!.innerHTML = text.replace(/#.+?\b/g, '<mark>$&</mark>');
+      setText(e.currentTarget.value.replace(/\n$/g, '\n\n'));
     },
-    [note.tags, setNote]
+    [setText]
   );
 
   const onScrollTextarea = useCallback((e: React.UIEvent<HTMLTextAreaElement, UIEvent>) => {
@@ -28,9 +23,12 @@ const HighLightText = ({ isDisabled = false, note, setNote }: IHighLightText) =>
   return (
     <>
       <div ref={refBackdrop} className="card__content card__backdrop">
-        <div ref={refHighlight} className="card__highlights card__text"></div>
+        <div ref={refHighlight} className="card__highlights card__text">
+          {parse(text.replace(/#.+?\b/g, '<mark>$&</mark>'))}
+        </div>
       </div>
       <textarea
+        value={text}
         disabled={isDisabled}
         onChange={(e) => onChangeTextarea(e)}
         onScroll={(e) => onScrollTextarea(e)}

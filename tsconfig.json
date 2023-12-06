@@ -10,6 +10,7 @@
       "@src/*":       ["./src/*"],
       "@assets/*":     ["./src/assets/*"],
       "@components/*": ["./src/components/*"],
+      "@config/*": ["./src/config/*"],
       "@constants/*":   ["./src/constants/*"],
       "@hooks/*":   ["./src/hooks/*"],
       "@layouts/*":   ["./src/layouts/*"],

@@ -1,5 +1,3 @@
-import './style.scss';
-
 import HighLightText from '@components/HighLightText';
 import ClearIcon from '@mui/icons-material/Clear';
 import EditNoteIcon from '@mui/icons-material/EditNote';

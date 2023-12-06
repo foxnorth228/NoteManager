@@ -1,17 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid';
 
 import { notesInitialState, notesName } from './config';
-import { INote } from './types';
+import { INote, INoteView } from './types';
 
 export const notesSlice = createSlice({
   name: notesName,
   initialState: notesInitialState,
   reducers: {
-    addNote: (state, { payload }: PayloadAction<INote>) => {
-      const isNotExist = state.findIndex((el) => el.id === payload.id) === -1;
-      if (isNotExist) {
-        state.push(payload);
-      }
+    addNote: (state, { payload }: PayloadAction<INoteView>) => {
+      const id = uuidv4();
+      state.push({ ...payload, id });
       return state;
     },
     editNote: (state, { payload }: PayloadAction<INote>) => {
@@ -21,9 +20,11 @@ export const notesSlice = createSlice({
       }
       return state;
     },
-    removeNote: (state, action: PayloadAction<number>) => {
+    removeNote: (state, action: PayloadAction<string>) => {
       const removedIndex = state.findIndex((el) => el.id === action.payload);
-      state.splice(removedIndex, 1);
+      if (removedIndex !== -1) {
+        state.splice(removedIndex, 1);
+      }
       return state;
     },
   },
