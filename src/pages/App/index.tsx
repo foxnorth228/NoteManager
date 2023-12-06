@@ -1,7 +1,6 @@
+import NoteList from '@layouts/NoteList';
 import { GlobalStyles } from '@mui/material';
 import React from 'react';
-
-import NoteList from '../../layouts/NoteList';
 
 const globalStyles = (
   <GlobalStyles

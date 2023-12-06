@@ -1,4 +1,5 @@
 import HighLightText from '@components/HighLightText';
+import config from '@config/config';
 import ClearIcon from '@mui/icons-material/Clear';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
@@ -13,15 +14,22 @@ type INoteComponent = {
 
 const Note = ({ baseNote }: INoteComponent) => {
   const [isEditable, setIsEditable] = useState(false);
-  const [note, setNote] = useState({ note: '', tags: [] as string[] });
+  const [text, setText] = useState(baseNote.text);
   const editNote = useEditNote();
   const removeNote = useRemoveNote();
 
   const onClickEdit = useCallback(() => {
+    if (isEditable) {
+      const regex = new RegExp(config.highlightRegEx.source, config.highlightRegEx.flags + 'g');
+      const tags = text.match(regex) ?? [];
+      editNote({ text, tags, id: baseNote.id });
+    }
     setIsEditable(!isEditable);
-  }, [isEditable]);
+  }, [baseNote.id, editNote, isEditable, text]);
 
-  const onClickDelete = useCallback(() => {}, []);
+  const onClickDelete = useCallback(() => {
+    removeNote(baseNote.id);
+  }, [baseNote.id, removeNote]);
 
   return (
     <Card
@@ -50,7 +58,7 @@ const Note = ({ baseNote }: INoteComponent) => {
           position: 'relative',
         }}
       >
-        <HighLightText isDisabled={!isEditable} note={note} setNote={setNote} />
+        <HighLightText isDisabled={!isEditable} text={text} setText={setText} />
       </CardContent>
       <CardContent></CardContent>
     </Card>

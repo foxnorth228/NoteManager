@@ -9,7 +9,9 @@ const NoteList = () => {
   return (
     <>
       <NoteNew />
-      {/*<Note />*/}
+      {notes.map((el) => (
+        <Note key={el.id} baseNote={el} />
+      ))}
     </>
   );
 };

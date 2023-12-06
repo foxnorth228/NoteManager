@@ -1,18 +1,19 @@
 import HighLightText from '@components/HighLightText';
+import config from '@config/config';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { Card, CardActions, CardContent, IconButton } from '@mui/material';
 import React, { useCallback, useState } from 'react';
 
 import { useAddNote } from '../../store/slices/notesSlice/hooks';
-import config from "@config/config";
 
 const NoteNew = () => {
   const addNote = useAddNote();
   const [text, setText] = useState('');
+
   const onClickAdd = useCallback(() => {
     const regex = new RegExp(config.highlightRegEx.source, config.highlightRegEx.flags + 'g');
     const tags = text.match(regex) ?? [];
-    addNote({ note: text, tags });
+    addNote({ text: text, tags });
     setText('');
   }, [addNote, text]);
 

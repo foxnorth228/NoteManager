@@ -1,5 +1,5 @@
 export interface INoteView {
-  note: string;
+  text: string;
   tags: string[];
 }
 

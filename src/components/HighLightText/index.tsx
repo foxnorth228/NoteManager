@@ -1,13 +1,12 @@
 import './style.scss';
 
-import React, { ChangeEvent, useCallback, useRef } from 'react';
 import parse from 'html-react-parser';
+import React, { ChangeEvent, useCallback, useRef } from 'react';
 
 import { IHighLightText } from './types';
 
 const HighLightText = ({ isDisabled = false, text, setText }: IHighLightText) => {
   const refBackdrop = useRef<HTMLDivElement>(null);
-  const refHighlight = useRef<HTMLDivElement>(null);
 
   const onChangeTextarea = useCallback(
     (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -22,8 +21,8 @@ const HighLightText = ({ isDisabled = false, text, setText }: IHighLightText) =>
 
   return (
     <>
-      <div ref={refBackdrop} className="card__content card__backdrop">
-        <div ref={refHighlight} className="card__highlights card__text">
+      <div ref={refBackdrop} className="highlightText__content highlightText__backdrop">
+        <div className="highlightText__highlights highlightText__text">
           {parse(text.replace(/#.+?\b/g, '<mark>$&</mark>'))}
         </div>
       </div>
@@ -32,7 +31,7 @@ const HighLightText = ({ isDisabled = false, text, setText }: IHighLightText) =>
         disabled={isDisabled}
         onChange={(e) => onChangeTextarea(e)}
         onScroll={(e) => onScrollTextarea(e)}
-        className="card__content card__textarea card__text"
+        className="highlightText__content highlightText__textarea highlightText__text"
       />
     </>
   );

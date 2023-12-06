@@ -20,5 +20,5 @@ export const useEditNote = () => {
 
 export const useRemoveNote = () => {
   const dispatch = useDispatch();
-  return (id: number) => dispatch(removeNote(id));
+  return (id: string) => dispatch(removeNote(id));
 };
