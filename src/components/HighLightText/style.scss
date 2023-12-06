@@ -37,7 +37,6 @@
 
 .highlightText__highlights {
   white-space: pre-wrap;
-  word-wrap: break-word;
   color: transparent;
   & mark {
     color: transparent;
@@ -46,6 +45,8 @@
 }
 
 .highlightText__text {
+  white-space: pre-wrap;
+  word-wrap: break-word;
   font: 18px/24px 'Open Sans', sans-serif;
   letter-spacing: 1px;
   padding: 12px 15px;

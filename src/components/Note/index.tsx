@@ -3,29 +3,33 @@ import config from '@config/config';
 import ClearIcon from '@mui/icons-material/Clear';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
-import { Card, CardActions, CardContent, IconButton } from '@mui/material';
+import { Button, Card, CardActions, CardContent, IconButton } from '@mui/material';
 import { useEditNote, useRemoveNote } from '@store/slices/notesSlice/hooks';
 import { INote } from '@store/slices/notesSlice/types';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 type INoteComponent = {
   baseNote: INote;
 };
 
 const Note = ({ baseNote }: INoteComponent) => {
+  const regex = useRef(new RegExp(config.highlightRegEx.source, config.highlightRegEx.flags + 'g'));
   const [isEditable, setIsEditable] = useState(false);
   const [text, setText] = useState(baseNote.text);
+  const [tags, setTags] = useState<Array<string>>([]);
   const editNote = useEditNote();
   const removeNote = useRemoveNote();
 
+  useEffect(() => {
+    setTags(text.match(regex.current) ?? []);
+  }, [text]);
+
   const onClickEdit = useCallback(() => {
     if (isEditable) {
-      const regex = new RegExp(config.highlightRegEx.source, config.highlightRegEx.flags + 'g');
-      const tags = text.match(regex) ?? [];
       editNote({ text, tags, id: baseNote.id });
     }
     setIsEditable(!isEditable);
-  }, [baseNote.id, editNote, isEditable, text]);
+  }, [baseNote.id, editNote, isEditable, tags, text]);
 
   const onClickDelete = useCallback(() => {
     removeNote(baseNote.id);
@@ -36,8 +40,9 @@ const Note = ({ baseNote }: INoteComponent) => {
       sx={{
         display: 'grid',
         gridTemplateRows: 'min-content 4fr 1fr',
-        maxWidth: 400,
-        minHeight: 400,
+        width: 350,
+        maxWidth: 350,
+        height: 450,
         boxShadow: 3,
       }}
     >
@@ -60,7 +65,40 @@ const Note = ({ baseNote }: INoteComponent) => {
       >
         <HighLightText isDisabled={!isEditable} text={text} setText={setText} />
       </CardContent>
-      <CardContent></CardContent>
+      <CardContent
+        sx={{
+          overflowY: 'auto',
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
+          msOverflowStyle: 'none',
+          scrollbarWidth: 'none',
+          paddingLeft: 2,
+          paddingRight: 2,
+          width: 'inherit',
+          maxWidth: 'inherit',
+          flexWrap: 'wrap',
+        }}
+      >
+        {tags.map((el, i) => (
+          <Button
+            variant="outlined"
+            sx={{
+              display: 'inline-block',
+              boxSizing: 'border-box',
+              textAlign: 'start',
+              width: 350 - 16 - 16,
+              maxWidth: 'fit-content',
+              textOverflow: 'ellipsis',
+              overflow: 'hidden',
+              whiteSpace: 'nowrap',
+            }}
+            key={i}
+          >
+            {el}
+          </Button>
+        ))}
+      </CardContent>
     </Card>
   );
 };
