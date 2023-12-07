@@ -26,7 +26,7 @@ const Searcher = () => {
         onChange={(e) => onInputTag(e)}
         onKeyUp={(e) => onKeyPressTag(e)}
         label="Input tag"
-        variant="standard"
+        variant="outlined"
       ></TextField>
     </Box>
   );
