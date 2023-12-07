@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-
-import NotesReducer from './slices/notesSlice';
-import { notesName } from './slices/notesSlice/config';
+import NotesReducer from '@store/slices/notesSlice';
+import { notesName } from '@store/slices/notesSlice/config';
+import TagsReducer from '@store/slices/tagsSlice';
+import { nameTagsSlice } from '@store/slices/tagsSlice/config';
 
 const store = configureStore({
   reducer: {
     [notesName]: NotesReducer,
+    [nameTagsSlice]: TagsReducer,
   },
 });
 

@@ -5,12 +5,14 @@ import { Button, Card, CardActions, CardContent, IconButton } from '@mui/materia
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useAddNote } from '../../store/slices/notesSlice/hooks';
+import { useSelectTag } from '@store/slices/tagsSlice/hooks';
 
 const NoteNew = () => {
   const regex = useRef(new RegExp(config.highlightRegEx.source, config.highlightRegEx.flags + 'g'));
   const addNote = useAddNote();
   const [text, setText] = useState('');
   const [tags, setTags] = useState<Array<string>>([]);
+  const selectTag = useSelectTag();
 
   useEffect(() => {
     setTags(text.match(regex.current) ?? []);
@@ -80,8 +82,10 @@ const NoteNew = () => {
               textOverflow: 'ellipsis',
               overflow: 'hidden',
               whiteSpace: 'nowrap',
+              textTransform: 'none',
             }}
             key={i}
+            onClick={() => selectTag(el)}
           >
             {el}
           </Button>
