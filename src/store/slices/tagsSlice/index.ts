@@ -13,7 +13,7 @@ const tagsSlice = createSlice({
       } else {
         state.selectedTags.push(action.payload);
       }
-      console.log(JSON.stringify(state))
+      console.log(JSON.stringify(state));
       return state;
     },
   },
