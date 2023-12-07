@@ -1,4 +1,6 @@
 export interface ITagsSlice {
-  totalTags: string[];
+  totalTags: {
+    [key: string]: number;
+  };
   selectedTags: string[];
 }

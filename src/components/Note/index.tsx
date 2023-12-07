@@ -17,14 +17,14 @@ const Note = ({ baseNote }: INoteComponent) => {
 
   const onClickEdit = useCallback(() => {
     if (isEditable) {
-      editNote({ text, tags, id: baseNote.id });
+      editNote({ text, tags, id: baseNote.id, oldTags: baseNote.tags });
     }
     setIsEditable(!isEditable);
-  }, [baseNote.id, editNote, isEditable, tags, text]);
+  }, [baseNote.id, baseNote.tags, editNote, isEditable, tags, text]);
 
   const onClickDelete = useCallback(() => {
-    removeNote(baseNote.id);
-  }, [baseNote.id, removeNote]);
+    removeNote({ id: baseNote.id, oldTags: baseNote.tags });
+  }, [baseNote.id, baseNote.tags, removeNote]);
 
   return (
     <NoteCard text={text} setText={setText} tags={tags} setTags={setTags} isEditable={isEditable}>

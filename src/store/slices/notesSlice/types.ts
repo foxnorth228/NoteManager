@@ -6,3 +6,7 @@ export interface INoteView {
 export interface INote extends INoteView {
   id: string;
 }
+
+export interface INoteEdit extends INote {
+  oldTags: string[];
+}

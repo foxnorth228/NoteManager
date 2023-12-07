@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../index';
 import { addNote, editNote, removeNote } from './index';
-import { INote, INoteView } from './types';
+import { INoteEdit, INoteView } from './types';
 
 export const useNotes = () => {
   return useSelector((state: RootState) => state.notes);
@@ -15,10 +15,10 @@ export const useAddNote = () => {
 
 export const useEditNote = () => {
   const dispatch = useDispatch();
-  return (note: INote) => dispatch(editNote(note));
+  return (note: INoteEdit) => dispatch(editNote(note));
 };
 
 export const useRemoveNote = () => {
   const dispatch = useDispatch();
-  return (id: string) => dispatch(removeNote(id));
+  return (el: { id: string; oldTags: string[] }) => dispatch(removeNote(el));
 };

@@ -1,12 +1,13 @@
+import ListSelectedTags from '@components/ListSelectedTags';
 import Searcher from '@components/Searcher';
-import { Box, Grid } from '@mui/material';
+import { Box } from '@mui/material';
 import React from 'react';
 
 const TagsFilter = () => {
   return (
     <Box>
       <Searcher></Searcher>
-      <Grid></Grid>
+      <ListSelectedTags />
     </Box>
   );
 };
