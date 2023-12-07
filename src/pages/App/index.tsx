@@ -1,4 +1,5 @@
 import NoteList from '@layouts/NoteList';
+import TagsFilter from '@layouts/TagsFilter';
 import { GlobalStyles } from '@mui/material';
 import React from 'react';
 
@@ -17,6 +18,7 @@ const App = () => {
   return (
     <div>
       {globalStyles}
+      <TagsFilter />
       <NoteList />
     </div>
   );

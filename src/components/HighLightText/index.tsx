@@ -5,7 +5,7 @@ import React, { ChangeEvent, useCallback, useRef } from 'react';
 
 import { IHighLightText } from './types';
 
-const HighLightText = ({ isShown = true, isDisabled = false, text, setText }: IHighLightText) => {
+const HighLightText = ({ isDisabled = false, text, setText }: IHighLightText) => {
   const refBackdrop = useRef<HTMLDivElement>(null);
 
   const onChangeTextarea = useCallback(
@@ -23,7 +23,7 @@ const HighLightText = ({ isShown = true, isDisabled = false, text, setText }: IH
     <>
       <div ref={refBackdrop} className="highlightText__content highlightText__backdrop">
         <div className="highlightText__highlights highlightText__text">
-          {isShown && parse(text.replace(/#.+?\b/g, '<mark>$&</mark>'))}
+          {!isDisabled && parse(text.replace(/#.+?\b/g, '<mark>$&</mark>'))}
         </div>
       </div>
       <textarea
