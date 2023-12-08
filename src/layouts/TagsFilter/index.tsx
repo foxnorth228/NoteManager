@@ -39,7 +39,7 @@ const TagsFilter = () => {
           padding: 2,
           borderLeft: 1,
           borderBottom: 1,
-          borderRadius: 2,
+          borderBottomRightRadius: 2,
           borderColor: 'grey.300',
         }}
       >

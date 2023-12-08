@@ -8,6 +8,7 @@ import React from 'react';
 const NoteList = () => {
   const notes = useNotes();
   const selectedTags = useSelectedTags();
+  console.log(notes);
   const filteredNotes = notes.filter((el) => {
     if (
       selectedTags.length === 0 ||

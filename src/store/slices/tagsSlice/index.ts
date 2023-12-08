@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { addNote, editNote, removeNote } from '../notesSlice';
+import { addNote, editNote, removeNote, setupStore } from "../notesSlice";
 import { initialStateTags, nameTagsSlice } from './config';
+
+let isFirstCall = true;
 
 const tagsSlice = createSlice({
   name: nameTagsSlice,
@@ -20,6 +22,22 @@ const tagsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(setupStore, (state, { payload }) => {
+        if (!isFirstCall) {
+          return state;
+        }
+        for (let i = 0; i < payload.length; ++i) {
+          for (let j = 0; j < payload[i].tags.length; ++j) {
+            if (payload[i].tags[j] in state.totalTags) {
+              state.totalTags[payload[i].tags[j]] += 1;
+            } else {
+              state.totalTags[payload[i].tags[j]] = 1;
+            }
+          }
+        }
+        isFirstCall = false;
+        return state;
+      })
       .addCase(addNote, (state, { payload: { tags } }) => {
         for (let i = 0; i < tags.length; ++i) {
           if (tags[i] in state.totalTags) {
