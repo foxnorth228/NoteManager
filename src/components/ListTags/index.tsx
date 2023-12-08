@@ -1,9 +1,17 @@
+import globalConfig from '@config/config';
 import CloseIcon from '@mui/icons-material/Close';
 import { Button, Grid, Tooltip, Typography } from '@mui/material';
+import { useSelectTag } from '@store/slices/tagsSlice/hooks';
 import React from 'react';
 
-import { useSelectTag } from '../../store/slices/tagsSlice/hooks';
+import config from './config';
 import { IListTags } from './types';
+
+declare module '@mui/material/Button' {
+  interface ButtonPropsColorOverrides {
+    custom: true;
+  }
+}
 
 const ListTags = ({ tags, isEndIconShown = false }: IListTags) => {
   const selectTag = useSelectTag();
@@ -12,21 +20,17 @@ const ListTags = ({ tags, isEndIconShown = false }: IListTags) => {
       sx={{
         height: 1,
         maxHeight: 1,
-        overflowY: 'auto',
-        '&::-webkit-scrollbar': {
-          display: 'none',
-        },
-        msOverflowStyle: 'none',
-        scrollbarWidth: 'none',
+        ...globalConfig.styleNoScrollbar,
       }}
       container
       columnSpacing={2}
       rowSpacing={1}
     >
       {tags.map((el) => (
-        <Grid item key={el} sx={{ maxWidth: 'min(100%, 280px)' }}>
+        <Grid item key={el} sx={{ maxWidth: config.maxWidth }}>
           <Tooltip sx={{ maxWidth: 'none' }} title={el} arrow disableInteractive={true}>
             <Button
+              color="custom"
               variant="outlined"
               sx={{
                 display: 'grid',
@@ -35,7 +39,7 @@ const ListTags = ({ tags, isEndIconShown = false }: IListTags) => {
                 boxSizing: 'border-box',
                 textAlign: 'start',
                 width: 'fit-content',
-                maxWidth: 'min(100%, 280px)',
+                maxWidth: config.maxWidth,
                 paddingLeft: 2,
                 paddingRight: 2,
                 border: 1,

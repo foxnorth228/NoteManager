@@ -1,3 +1,5 @@
+//i use styles because i have a lot of reusable rules
+
 .highlightText__content {
   position: absolute;
   width: 100%;
@@ -16,8 +18,8 @@
   border: 0;
   border-radius: 0;
   outline: 0;
-  color: #444; /* or whatever */
-  background-color: rgba(0, 0, 0, 0.03);
+  color: #444;
+  background-color: rgba(0, 0, 0, 0.05);
   z-index: 2;
   resize: none;
   transition: background-color 0.1s linear;
@@ -25,14 +27,15 @@
     background-color: rgba(0, 0, 0, 0);
   }
   &:focus {
-    background-color: rgba(0, 0, 0, 0.08);
+    background-color: rgba(0, 0, 0, 0.09);
   }
 }
 
 .highlightText__backdrop {
   pointer-events: none;
+  touch-action: none;
   overflow: auto;
-  background-color: #fff;
+  background-color: white;
 }
 
 .highlightText__highlights {
@@ -40,7 +43,7 @@
   color: transparent;
   & mark {
     color: transparent;
-    background-color: #d4e9ab;
+    background-color: #c1de86;
   }
 }
 

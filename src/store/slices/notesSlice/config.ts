@@ -1,4 +1,9 @@
 import { INote } from './types';
 
-export const notesName = 'notes';
-export const notesInitialState: INote[] = [];
+const config = {
+  name: 'notes',
+  initialState: [] as INote[],
+  isFirstSetup: true,
+};
+
+export default config;

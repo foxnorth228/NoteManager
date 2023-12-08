@@ -30,7 +30,6 @@ export function openDatabasePromise(
 
     dbOpenRequest.onsuccess = () => {
       resolve(dbOpenRequest.result);
-      console.log('db created');
     };
   });
 }

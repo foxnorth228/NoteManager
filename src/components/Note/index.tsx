@@ -1,3 +1,4 @@
+import NoteCard from '@components/NoteCard';
 import ClearIcon from '@mui/icons-material/Clear';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
@@ -5,7 +6,6 @@ import { IconButton } from '@mui/material';
 import { useEditNote, useRemoveNote } from '@store/slices/notesSlice/hooks';
 import React, { useCallback, useState } from 'react';
 
-import NoteCard from '../NoteCard';
 import { INoteComponent } from './types';
 
 const Note = ({ baseNote }: INoteComponent) => {

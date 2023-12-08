@@ -1,11 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { RootState } from '../../index';
+import { RootState } from '@src/store';
 import { selectTag } from './index';
-
-export const useTags = () => {
-  return useSelector((state: RootState) => state.tags);
-};
 
 export const useTotalTags = () => {
   const totalTags = useSelector((state: RootState) => state.tags.totalTags);

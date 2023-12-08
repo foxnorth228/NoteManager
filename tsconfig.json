@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "declaration": true,
     "jsx": "react",
     "target": "ESNext",
     "module": "ESNext",
@@ -25,7 +26,7 @@
     "strict": true,
     "noImplicitAny": true,
     "skipLibCheck": true,
-    "types": ["node"],
+    "types": ["node"]
   },
-  "include": ["src/**/*", "./src/utils/theme/index.d.ts", "*/**/*.d.ts"],
+  "include": ["src/**/*"],
 }

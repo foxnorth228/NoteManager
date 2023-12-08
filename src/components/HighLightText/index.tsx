@@ -1,13 +1,12 @@
 import './style.scss';
 
+import globalConfig from '@config/config';
 import parse from 'html-react-parser';
 import React, { ChangeEvent, useCallback, useRef } from 'react';
 
-import config from '../../config/config';
 import { IHighLightText } from './types';
 
 const HighLightText = ({ isDisabled = false, text, setText }: IHighLightText) => {
-  const regex = useRef(new RegExp(config.highlightRegEx.source, config.highlightRegEx.flags + 'g'));
   const refBackdrop = useRef<HTMLDivElement>(null);
 
   const onChangeTextarea = useCallback(
@@ -25,7 +24,7 @@ const HighLightText = ({ isDisabled = false, text, setText }: IHighLightText) =>
     <>
       <div ref={refBackdrop} className="highlightText__content highlightText__backdrop">
         <div className="highlightText__highlights highlightText__text">
-          {!isDisabled && parse(text.replace(regex.current, '<mark>$&</mark>'))}
+          {!isDisabled && parse(text.replace(globalConfig.highlightRegEx, '<mark>$&</mark>'))}
         </div>
       </div>
       <textarea

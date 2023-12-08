@@ -1,17 +1,16 @@
 import HighLightText from '@components/HighLightText';
-import config from '@config/config';
+import globalConfig from '@config/config';
 import { Button, Card, CardActions, CardContent, Tooltip } from '@mui/material';
 import { useSelectTag } from '@store/slices/tagsSlice/hooks';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 
 import { INoteCard } from './types';
 
 const NoteCard = ({ text, setText, tags, setTags, isEditable = true, children }: INoteCard) => {
-  const regex = useRef(new RegExp(config.highlightRegEx.source, config.highlightRegEx.flags + 'g'));
   const selectTag = useSelectTag();
 
   useEffect(() => {
-    setTags([...new Set(text.match(regex.current) ?? [])]);
+    setTags([...new Set(text.match(globalConfig.highlightRegEx) ?? [])]);
   }, [setTags, text]);
 
   return (
@@ -25,7 +24,7 @@ const NoteCard = ({ text, setText, tags, setTags, isEditable = true, children }:
           xs: '90%',
         },
         height: 450,
-        boxShadow: 3,
+        boxShadow: 6,
       }}
     >
       <CardActions sx={{ justifyContent: 'flex-end' }}>{children}</CardActions>
@@ -42,12 +41,7 @@ const NoteCard = ({ text, setText, tags, setTags, isEditable = true, children }:
       </CardContent>
       <CardContent
         sx={{
-          overflowY: 'auto',
-          '&::-webkit-scrollbar': {
-            display: 'none',
-          },
-          msOverflowStyle: 'none',
-          scrollbarWidth: 'none',
+          ...globalConfig.styleNoScrollbar,
           paddingLeft: 2,
           paddingRight: 2,
           width: 'inherit',
@@ -56,8 +50,9 @@ const NoteCard = ({ text, setText, tags, setTags, isEditable = true, children }:
         }}
       >
         {tags.map((el, i) => (
-          <Tooltip sx={{ maxWidth: 'none' }} title={el} arrow>
+          <Tooltip key={i} sx={{ maxWidth: 'none' }} title={el} arrow>
             <Button
+              color="custom"
               variant="outlined"
               sx={{
                 display: 'inline-block',
@@ -72,7 +67,6 @@ const NoteCard = ({ text, setText, tags, setTags, isEditable = true, children }:
                 whiteSpace: 'nowrap',
                 textTransform: 'none',
               }}
-              key={i}
               onClick={() => selectTag(el)}
             >
               {el}

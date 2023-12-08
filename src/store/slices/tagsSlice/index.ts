@@ -1,13 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { addNote, editNote, removeNote, setupStore } from '../notesSlice';
-import { initialStateTags, nameTagsSlice } from './config';
-
-let isFirstCall = true;
+import config from './config';
 
 const tagsSlice = createSlice({
-  name: nameTagsSlice,
-  initialState: initialStateTags,
+  name: config.name,
+  initialState: config.initialState,
   reducers: {
     selectTag: (state, action: PayloadAction<string>) => {
       if (state.selectedTags.includes(action.payload)) {
@@ -16,14 +14,13 @@ const tagsSlice = createSlice({
       } else {
         state.selectedTags.push(action.payload);
       }
-      console.log(JSON.stringify(state));
       return state;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(setupStore, (state, { payload }) => {
-        if (!isFirstCall) {
+        if (!config.isFirstSetup) {
           return state;
         }
         for (let i = 0; i < payload.length; ++i) {
@@ -35,7 +32,7 @@ const tagsSlice = createSlice({
             }
           }
         }
-        isFirstCall = false;
+        config.isFirstSetup = false;
         return state;
       })
       .addCase(addNote, (state, { payload: { tags } }) => {

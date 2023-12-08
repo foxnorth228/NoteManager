@@ -1,7 +1,12 @@
 import { ITagsSlice } from './types';
 
-export const nameTagsSlice = 'tags';
-export const initialStateTags: ITagsSlice = {
-  totalTags: {},
-  selectedTags: [],
+const config = {
+  name: 'tags',
+  initialState: {
+    totalTags: {},
+    selectedTags: [],
+  } as ITagsSlice,
+  isFirstSetup: true,
 };
+
+export default config;

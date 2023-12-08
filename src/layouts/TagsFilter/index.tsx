@@ -1,8 +1,10 @@
 import ListTags from '@components/ListTags';
 import Searcher from '@components/Searcher';
-import { Box, Grid } from '@mui/material';
+import { Box } from '@mui/material';
 import { useSelectedTags, useTotalTags } from '@store/slices/tagsSlice/hooks';
 import React from 'react';
+
+import config from './config';
 
 const TagsFilter = () => {
   const totalTags = useTotalTags();
@@ -21,35 +23,17 @@ const TagsFilter = () => {
           xs: '1fr 1fr',
         },
         marginBottom: 1,
-        height: {
-          sm: '20vh',
-          xs: '30vh',
-        },
-        maxHeight: {
-          sm: '20vh',
-          xs: '30vh',
-        },
+        height: config.height,
+        maxHeight: config.height,
       }}
     >
       <Box
         sx={{
-          width: 1,
-          height: 1,
-          maxHeight: 1,
-          padding: 2,
           borderRight: 1,
-          borderBottom: 1,
-          borderRadius: 2,
-          borderColor: 'grey.300',
           display: 'grid',
           gridTemplateRows: 'min-content 1fr',
           rowGap: 2,
-          overflowY: 'auto',
-          '&::-webkit-scrollbar': {
-            display: 'none',
-          },
-          msOverflowStyle: 'none',
-          scrollbarWidth: 'none',
+          ...config.tagFilterElement,
         }}
       >
         <Searcher></Searcher>
@@ -57,20 +41,8 @@ const TagsFilter = () => {
       </Box>
       <Box
         sx={{
-          width: 1,
-          height: 1,
-          maxHeight: 1,
-          padding: 2,
           borderLeft: 1,
-          borderBottom: 1,
-          borderRadius: 2,
-          borderColor: 'grey.300',
-          overflowY: 'auto',
-          '&::-webkit-scrollbar': {
-            display: 'none',
-          },
-          msOverflowStyle: 'none',
-          scrollbarWidth: 'none',
+          ...config.tagFilterElement,
         }}
       >
         <ListTags tags={totalTags} />

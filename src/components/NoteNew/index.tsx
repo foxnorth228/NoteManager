@@ -1,8 +1,8 @@
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { IconButton } from '@mui/material';
+import { useAddNote } from '@store/slices/notesSlice/hooks';
 import React, { useCallback, useState } from 'react';
 
-import { useAddNote } from '../../store/slices/notesSlice/hooks';
 import NoteCard from '../NoteCard';
 
 const NoteNew = () => {

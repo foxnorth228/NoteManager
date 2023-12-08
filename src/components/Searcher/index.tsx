@@ -9,7 +9,7 @@ const Searcher = () => {
   const onKeyPressTag = useCallback(
     (e: React.KeyboardEvent<HTMLDivElement>) => {
       if (e.key === 'Enter') {
-        selectTag(tag);
+        selectTag('#' + tag);
         setTag('');
       }
     },
@@ -22,10 +22,11 @@ const Searcher = () => {
   return (
     <Box>
       <TextField
+        sx={{ backgroundColor: 'white' }}
         value={tag}
         onChange={(e) => onInputTag(e)}
         onKeyUp={(e) => onKeyPressTag(e)}
-        label="Input tag"
+        label="Input tag (without #)"
         variant="outlined"
       ></TextField>
     </Box>
