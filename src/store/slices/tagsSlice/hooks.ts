@@ -8,7 +8,8 @@ export const useTags = () => {
 };
 
 export const useTotalTags = () => {
-  return useSelector((state: RootState) => state.tags.totalTags);
+  const totalTags = useSelector((state: RootState) => state.tags.totalTags);
+  return Object.keys(totalTags);
 };
 
 export const useSelectedTags = () => {

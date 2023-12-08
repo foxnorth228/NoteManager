@@ -7,6 +7,7 @@ const globalStyles = (
   <GlobalStyles
     styles={() => ({
       ':root': { boxSizing: 'border-box' },
+      body: { margin: 0 },
       '*': { boxSizing: 'inherit' },
       ':before': { boxSizing: 'inherit' },
       ':after': { boxSizing: 'inherit' },

@@ -2,11 +2,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Button, Grid, Typography } from '@mui/material';
 import React from 'react';
 
-import { useSelectedTags, useSelectTag } from '../../store/slices/tagsSlice/hooks';
+import { useSelectTag } from '../../store/slices/tagsSlice/hooks';
+import { IListTags } from './types';
 
-const ListSelectedTags = () => {
+const ListTags = ({ tags, isEndIconShown = false }: IListTags) => {
   const selectTag = useSelectTag();
-  const tags = useSelectedTags();
   return (
     <Grid container columnSpacing={2} rowSpacing={1}>
       {tags.map((el) => (
@@ -28,7 +28,7 @@ const ListSelectedTags = () => {
                 margin: 0,
               },
             }}
-            endIcon={<CloseIcon />}
+            endIcon={isEndIconShown && <CloseIcon />}
             onClick={() => selectTag(el)}
           >
             <Typography
@@ -52,4 +52,4 @@ const ListSelectedTags = () => {
   );
 };
 
-export default ListSelectedTags;
+export default ListTags;

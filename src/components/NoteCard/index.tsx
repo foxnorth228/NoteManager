@@ -60,6 +60,8 @@ const NoteCard = ({ text, setText, tags, setTags, isEditable = true, children }:
               boxSizing: 'border-box',
               textAlign: 'start',
               width: 350 - 16 - 16,
+              marginRight: 1,
+              marginBottom: 1,
               maxWidth: 'fit-content',
               textOverflow: 'ellipsis',
               overflow: 'hidden',
