@@ -1,9 +1,9 @@
+import config from '@config/config';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
 
 import { notesInitialState, notesName } from './config';
 import { INote, INoteEdit, INoteView } from './types';
-import config from '@config/config';
 
 let isFirstCall = true;
 

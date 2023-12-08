@@ -37,11 +37,11 @@ export default class IndexedDbRepository {
     txMode: IDBTransactionMode,
     callback: (objectStore: IDBObjectStore) => Promise<unknown>
   ) {
-      await this.openDatabasePromise;
-      const transaction = this.dbConnection?.transaction([this.nameObjectStore], txMode);
-      const objectStore = transaction?.objectStore(this.nameObjectStore);
-      if (typeof objectStore !== 'undefined') {
-        return await callback(objectStore);
-      }
+    await this.openDatabasePromise;
+    const transaction = this.dbConnection?.transaction([this.nameObjectStore], txMode);
+    const objectStore = transaction?.objectStore(this.nameObjectStore);
+    if (typeof objectStore !== 'undefined') {
+      return await callback(objectStore);
+    }
   }
 }

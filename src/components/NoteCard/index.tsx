@@ -1,6 +1,6 @@
 import HighLightText from '@components/HighLightText';
 import config from '@config/config';
-import { Button, Card, CardActions, CardContent } from '@mui/material';
+import { Button, Card, CardActions, CardContent, Tooltip } from '@mui/material';
 import { useSelectTag } from '@store/slices/tagsSlice/hooks';
 import React, { useEffect, useRef } from 'react';
 
@@ -11,7 +11,7 @@ const NoteCard = ({ text, setText, tags, setTags, isEditable = true, children }:
   const selectTag = useSelectTag();
 
   useEffect(() => {
-    setTags(text.match(regex.current) ?? []);
+    setTags([...new Set(text.match(regex.current) ?? [])]);
   }, [setTags, text]);
 
   return (
@@ -19,8 +19,11 @@ const NoteCard = ({ text, setText, tags, setTags, isEditable = true, children }:
       sx={{
         display: 'grid',
         gridTemplateRows: 'min-content 4fr 1.5fr',
-        width: 350,
-        maxWidth: 350,
+        width: {
+          lg: 350,
+          sm: 270,
+          xs: '90%',
+        },
         height: 450,
         boxShadow: 3,
       }}
@@ -53,26 +56,28 @@ const NoteCard = ({ text, setText, tags, setTags, isEditable = true, children }:
         }}
       >
         {tags.map((el, i) => (
-          <Button
-            variant="outlined"
-            sx={{
-              display: 'inline-block',
-              boxSizing: 'border-box',
-              textAlign: 'start',
-              width: 350 - 16 - 16,
-              marginRight: 1,
-              marginBottom: 1,
-              maxWidth: 'fit-content',
-              textOverflow: 'ellipsis',
-              overflow: 'hidden',
-              whiteSpace: 'nowrap',
-              textTransform: 'none',
-            }}
-            key={i}
-            onClick={() => selectTag(el)}
-          >
-            {el}
-          </Button>
+          <Tooltip sx={{ maxWidth: 'none' }} title={el} arrow>
+            <Button
+              variant="outlined"
+              sx={{
+                display: 'inline-block',
+                boxSizing: 'border-box',
+                textAlign: 'start',
+                width: 350 - 16 - 16,
+                marginRight: 1,
+                marginBottom: 1,
+                maxWidth: 'fit-content',
+                textOverflow: 'ellipsis',
+                overflow: 'hidden',
+                whiteSpace: 'nowrap',
+                textTransform: 'none',
+              }}
+              key={i}
+              onClick={() => selectTag(el)}
+            >
+              {el}
+            </Button>
+          </Tooltip>
         ))}
       </CardContent>
     </Card>

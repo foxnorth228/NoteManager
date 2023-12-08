@@ -20,7 +20,13 @@ const NoteList = () => {
   });
   return (
     <Box
-      sx={{ display: 'grid', padding: 2, rowGap: 3, gridTemplateColumns: { xl: 'repeat(4, 1fr)' } }}
+      sx={{
+        display: 'grid',
+        padding: 2,
+        rowGap: 3,
+        gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: 'repeat(3, 1fr)', xl: 'repeat(4, 1fr)' },
+        justifyItems: 'center',
+      }}
     >
       <NoteNew />
       {filteredNotes.map((el) => (

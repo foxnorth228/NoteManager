@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { addNote, editNote, removeNote, setupStore } from "../notesSlice";
+import { addNote, editNote, removeNote, setupStore } from '../notesSlice';
 import { initialStateTags, nameTagsSlice } from './config';
 
 let isFirstCall = true;

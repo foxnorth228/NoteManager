@@ -1,10 +1,11 @@
 import NoteList from '@layouts/NoteList';
 import TagsFilter from '@layouts/TagsFilter';
 import { GlobalStyles } from '@mui/material';
-import React, { useEffect } from "react";
-import config from "../../config/config";
-import { useSetupStore } from "../../store/slices/notesSlice/hooks";
-import { INote } from "../../store/slices/notesSlice/types";
+import React, { useLayoutEffect } from 'react';
+
+import config from '../../config/config';
+import { useSetupStore } from '../../store/slices/notesSlice/hooks';
+import { INote } from '../../store/slices/notesSlice/types';
 
 const globalStyles = (
   <GlobalStyles
@@ -20,7 +21,7 @@ const globalStyles = (
 
 const App = () => {
   const setupStore = useSetupStore();
-  useEffect(() => {
+  useLayoutEffect(() => {
     console.log('setup');
     const setDataToStore = async () => {
       const result = (await config.database.getAll()) as INote[];

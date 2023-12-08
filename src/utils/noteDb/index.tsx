@@ -1,8 +1,8 @@
+import { INote } from '@store/slices/notesSlice/types';
 import IndexedDbRepository from '@utils/indexedDb';
 
 import config from './config';
 import { addPromise, deletePromise, getAllPromise, putPromise } from './functions';
-import { INote } from "@store/slices/notesSlice/types";
 
 export default class NoteDb extends IndexedDbRepository {
   private constructor(
