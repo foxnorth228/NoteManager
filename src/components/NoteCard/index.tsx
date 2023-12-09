@@ -59,7 +59,7 @@ const NoteCard = ({ text, setText, tags, setTags, isEditable = true, children }:
                 display: 'inline-block',
                 boxSizing: 'border-box',
                 textAlign: 'start',
-                width: 350 - 16 - 16,
+                width: 1,
                 marginRight: 1,
                 marginBottom: 1,
                 maxWidth: 'fit-content',
