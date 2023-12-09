@@ -28,6 +28,7 @@ const HighLightText = ({ isDisabled = false, text, setText }: IHighLightText) =>
         </div>
       </div>
       <textarea
+        name="hightlightedText"
         value={text}
         disabled={isDisabled}
         onChange={(e) => onChangeTextarea(e)}

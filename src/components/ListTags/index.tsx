@@ -30,6 +30,7 @@ const ListTags = ({ tags, isEndIconShown = false }: IListTags) => {
         <Grid item key={el} sx={{ maxWidth: config.maxWidth }}>
           <Tooltip sx={{ maxWidth: 'none' }} title={el} arrow disableInteractive={true}>
             <Button
+              aria-label="tag"
               color="custom"
               variant="outlined"
               sx={{

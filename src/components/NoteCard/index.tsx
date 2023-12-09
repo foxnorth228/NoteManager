@@ -52,6 +52,7 @@ const NoteCard = ({ text, setText, tags, setTags, isEditable = true, children }:
         {tags.map((el, i) => (
           <Tooltip key={i} sx={{ maxWidth: 'none' }} title={el} arrow>
             <Button
+              aria-label="tag"
               color="custom"
               variant="outlined"
               sx={{
