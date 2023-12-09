@@ -3,7 +3,7 @@ import globalConfig from '@config/config';
 const config = {
   height: {
     sm: '20vh',
-    xs: '30vh',
+    xs: '60vh',
   },
   tagFilterElement: {
     width: 1,
