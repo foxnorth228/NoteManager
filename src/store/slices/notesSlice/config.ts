@@ -7,3 +7,4 @@ const config = {
 };
 
 export default config;
+export const nameNotes = 'notes';

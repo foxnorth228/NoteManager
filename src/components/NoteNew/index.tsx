@@ -8,7 +8,6 @@ import NoteCard from '../NoteCard';
 const NoteNew = () => {
   const [text, setText] = useState('');
   const [tags, setTags] = useState<Array<string>>([]);
-
   const addNote = useAddNote();
 
   const onClickAdd = useCallback(() => {

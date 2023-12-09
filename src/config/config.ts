@@ -1,7 +1,7 @@
 import NoteDb from '@utils/noteDb';
 
 const globalConfig = {
-  highlightRegEx: /#[а-яА-Яa-zA-Z0-9_]+\b/g,
+  highlightRegEx: /#[а-яА-Яa-zA-Z0-9_]+/g,
   database: NoteDb.init(),
   styleNoScrollbar: {
     overflowY: 'auto',

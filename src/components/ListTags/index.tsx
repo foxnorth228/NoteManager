@@ -39,6 +39,10 @@ const ListTags = ({ tags, isEndIconShown = false }: IListTags) => {
                 columnGap: 1,
                 boxSizing: 'border-box',
                 textAlign: 'start',
+                minHeight: {
+                  sm: '',
+                  xs: 250,
+                },
                 width: 'fit-content',
                 maxWidth: config.maxWidth,
                 paddingLeft: 2,

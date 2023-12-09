@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { RootState } from "@src/store";
+import { RootState } from '@src/store';
 import { addNote, editNote, removeNote, setupStore } from './index';
 import { INote, INoteEdit, INoteView } from './types';
 

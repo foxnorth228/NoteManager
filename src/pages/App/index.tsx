@@ -3,9 +3,8 @@ import NoteList from '@layouts/NoteList';
 import TagsFilter from '@layouts/TagsFilter';
 import { useSetupStore } from '@store/slices/notesSlice/hooks';
 import { INote } from '@store/slices/notesSlice/types';
+import globalStyles from '@utils/globalStyle';
 import React, { useLayoutEffect } from 'react';
-
-import globalStyles from './globalStyles';
 
 const App = () => {
   const setupStore = useSetupStore();
