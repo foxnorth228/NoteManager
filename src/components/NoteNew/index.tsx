@@ -22,7 +22,7 @@ const NoteNew = () => {
   return (
     <NoteCard text={text} setText={setText} tags={tags} setTags={setTags}>
       <>
-        <IconButton onClick={onClickAdd}>
+        <IconButton aria-label="Add note" onClick={onClickAdd}>
           <AddCircleOutlineIcon />
         </IconButton>
       </>

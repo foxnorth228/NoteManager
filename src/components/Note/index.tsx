@@ -29,10 +29,10 @@ const Note = ({ baseNote }: INoteComponent) => {
   return (
     <NoteCard text={text} setText={setText} tags={tags} setTags={setTags} isEditable={isEditable}>
       <>
-        <IconButton onClick={onClickEdit}>
+        <IconButton aria-label={isEditable ? 'Edit note' : 'Save note'} onClick={onClickEdit}>
           {isEditable ? <SaveOutlinedIcon /> : <EditNoteIcon />}
         </IconButton>
-        <IconButton onClick={onClickDelete}>
+        <IconButton aria-label="Delete note" onClick={onClickDelete}>
           <ClearIcon></ClearIcon>
         </IconButton>
       </>
